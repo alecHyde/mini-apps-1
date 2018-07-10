@@ -1,3 +1,5 @@
+
+
 // getElementsByClassName returns an array
 // make an event handler for each box on the board
 var topLeft = document.getElementsByClassName(1)[0];
@@ -30,16 +32,13 @@ for (var i = 0; i < allSquares.length; i++) {
     // console.log(event, 'the evenet');
     makeMove(event.path[0])
   });
-
 }
-
 
 var count = 0;
 var lastWinner = 'X';
 var currentPlayer = 'X';
 var xWins = 0;
 var oWins = 0;
-
 
 var isLegalMove = function(element) {
   if(element.innerHTML === 'X' || element.innerHTML === 'O') {
@@ -76,10 +75,14 @@ var isWinningMove = function() {
   return false;
 }
 
+var player1 = prompt('Player 1, please enter your name', '');
+var player2 = prompt('Player 2, please enter your name', '');
+
 var updateScoreboard = function() {
   var score = document.getElementsByClassName('score')[0];
-  score.innerHTML = `X Wins: ${xWins} <br> O Wins: ${oWins}`
+  score.innerHTML = `${player1} (X) Score: ${xWins} <br> ${player2} (O) Score: ${oWins}`
 }
+updateScoreboard();
 
 var makeMove = function(element) {
   // if the space is already occupied, return out of the makeMove function without making a move.
@@ -122,13 +125,11 @@ var makeMove = function(element) {
 
 
 var toggle = function() {
-  if(currentPlayer === 'X' && count > 0) {
+  if(currentPlayer === 'X') {
     currentPlayer = 'O';
-  } else if(currentPlayer === 'O' && count > 0) {
-    currentPlayer = 'X'
   } else {
-    currentPlayer = lastWinner;
-  }
+    currentPlayer = 'X'
+  } 
   return currentPlayer;
 }
 
