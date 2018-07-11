@@ -1,8 +1,27 @@
+
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 
 app.use(express.static('client'));
 app.listen(3000);
+
+// body parser middlewhere
+// LOOK INTO BODY PARSER REQUIREMENTS
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+
+
+// for post request
+app.post('/', function(req, res) {
+  console.log('FORM SUBMITTED');
+  // going to want to do things inside req.body (body parser)
+
+
+
+  // eventually something like res.send({results: createCSVReport(req.body.results)});
+
+})
 
 
 var createCSVReport = function(json) {
@@ -35,6 +54,8 @@ var createCSVReport = function(json) {
     }
   }
   recurse(obj);
+  // need to return CSVReport
+  return CSVReport;
 }
 
 
