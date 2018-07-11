@@ -14,19 +14,19 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 // for post request
 app.post('/', function(req, res) {
-  console.log('FORM SUBMITTED');
+  console.log('FORM SUBMITTED', req.body)
   // going to want to do things inside req.body (body parser)
 
 
 
-  // eventually something like res.send({results: createCSVReport(req.body.results)});
+  res.send(createCSVReport(req.body));
 
 })
 
 
-var createCSVReport = function(json) {
+var createCSVReport = function(obj) {
   // first parse back to an object
-  var obj = JSON.parse(json);
+  // var obj = JSON.parse(json);
   var CSVReport = ``;
   var keys = Object.keys(obj);
   // remove children attribute from keys
@@ -34,18 +34,18 @@ var createCSVReport = function(json) {
   // add keys to CSV report
   for (var i = 0; i < keys.length; i++) {
     CSVReport += keys[i]; 
-    CSVReport += ',';
+    CSVReport += ', ';
   }
   // add linebreak to CSV report 
-  CSVReport += '\n';
+  CSVReport += '\n' + '</br>';
   // recursively iterate through obj to add values to CSV report
   var recurse = function (object) {
     // base case: add values to CSV report and add linebreak at the end
     for (var i = 0; i < keys.length; i++) {
       CSVReport += object[keys[i]]; 
-      CSVReport += ',';
+      CSVReport += ', ';
     }
-    CSVReport += '\n';
+    CSVReport += '\n' + '</br>';
     // recursive case: check to see if children are present, if so, call recurse on children
     if (object[child].length > 0) {
       for (var j = 0; j < object[child].length; j++) {  

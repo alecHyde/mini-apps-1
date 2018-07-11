@@ -13,7 +13,11 @@ $('#submission').on('submit', (e) => {
     url: 'http://127.0.0.1:3000/',
     // expecting an object, so wrap in an object, and pass data as a key
     data: dataInput,
-    success: console.log('successfully submitted'),
+    success: function(data){
+      console.log(data);
+      $('.response').append(data);
+      // data;
+    }, 
     // datatype: 'JSON'
     contentType: 'application/JSON'
 
